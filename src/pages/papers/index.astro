@@ -20,7 +20,7 @@ const collection = (await getCollection("papers"))
         </BackToPrev>
       </div>
       <div class="font-semibold text-black dark:text-white">
-        Papers
+        Papers I've Read
       </div>
       <ul class="flex flex-col gap-4">
         { 
@@ -31,10 +31,13 @@ const collection = (await getCollection("papers"))
           ))
         }
       </ul>
-<!-- 
-      <ul class="animate flex flex-col gap-4">
 
-      </ul> -->
+      <div class="font-semibold text-black dark:text-white">
+        Papers I've Published
+      </div>
+      <ul class="animate flex flex-col gap-4">
+        <p>I have not Published any papers yet</p>
+      </ul>
     </div>
   </Container>
 </PageLayout>
