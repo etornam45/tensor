@@ -22,6 +22,14 @@ body {
   @apply flex flex-col;
   @apply bg-neutral-100 dark:bg-neutral-900;
   @apply text-black/50 dark:text-white/75;
+
+
+  background-image: radial-gradient(circle at center, rgba(246,144,144,0.4) 0.5px, transparent 0);
+  background-size: 8px 8px; 
+}
+
+.dark body {
+  background-image: radial-gradient(circle at center, rgba(144,144, 246,0.2) 0.5px, transparent 0);
 }
 
 header {
