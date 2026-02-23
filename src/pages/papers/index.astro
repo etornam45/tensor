@@ -3,15 +3,15 @@ import { getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
 import ArrowCard from "@components/ArrowCard.astro";
-import { PROJECTS } from "@consts";
+import { PAPERS } from "@consts";
 import BackToPrev from "@components/BackToPrev.astro";
 
-const projects = (await getCollection("projects"))
-  .filter(project => !project.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const collection = (await getCollection("papers"))
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.dateRead.valueOf() - a.data.dateRead.valueOf());
 ---
 
-<PageLayout title={PROJECTS.TITLE} description={PROJECTS.DESCRIPTION}>
+<PageLayout title={PAPERS.TITLE} description={PAPERS.DESCRIPTION}>
   <Container>
     <div class="space-y-10">
       <div class="animate">
@@ -19,18 +19,22 @@ const projects = (await getCollection("projects"))
           Back to home
         </BackToPrev>
       </div>
-      <div class="animate font-semibold text-black dark:text-white">
-        Projects
+      <div class="font-semibold text-black dark:text-white">
+        Papers
       </div>
-      <ul class="animate flex flex-col gap-4">
-        {
-          projects.map((project) => (
+      <ul class="flex flex-col gap-4">
+        { 
+          collection.map(entry => (
             <li>
-              <ArrowCard entry={project}/>
+              <ArrowCard entry={entry} />
             </li>
           ))
         }
       </ul>
+<!-- 
+      <ul class="animate flex flex-col gap-4">
+
+      </ul> -->
     </div>
   </Container>
 </PageLayout>

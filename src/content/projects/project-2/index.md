@@ -1,14 +1,14 @@
 ---
-title: "Astro Nano"
+title: "Etornam"
 description: "Minimal portfolio and blog build with astro and no frameworks."
 date: "Mar 26 2024"
 demoURL: "https://astro-nano-demo.vercel.app"
 repoURL: "https://github.com/markhorn-dev/astro-nano"
 ---
 
-![Astro Nano](/astro-nano.png)
+![Etornam](/astro-nano.png)
 
-Astro Nano is a static, minimalist, lightweight, lightning fast portfolio and blog theme.
+Etornam is a static, minimalist, lightweight, lightning fast portfolio and blog theme.
 
 Built with Astro, Tailwind and Typescript, an no frameworks.
 
@@ -42,7 +42,7 @@ It was designed as an even more minimal theme than my popular theme [Astro Spher
 - ✅ MDX Support (components in your markdown)
 
 ## 💯 Lighthouse score
-![Astro Nano Lighthouse Score](/lighthouse.png)
+![Etornam Lighthouse Score](/lighthouse.png)
 
 ## 🕊️ Lightweight
 No frameworks or added bulk

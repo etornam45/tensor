@@ -4,30 +4,27 @@ import Link from "@components/Link.astro";
 import { SITE } from "@consts";
 ---
 
-<header>
+<header class="p-2 border-b-4 border-neutral-800/50">
   <Container>
     <div class="flex flex-wrap gap-y-2 justify-between">
       <Link href="/" underline={false}>
-        <div class="font-semibold">
-          {SITE.NAME}
+        <div class="flex items-center gap-2">
+          <!-- <img src="/tensor.png" alt="logo" class="w-4" /> -->
+          <div class="font-semibold">
+            {SITE.NAME}
+          </div>
         </div>
       </Link>
       <nav class="flex gap-1">
-        <Link href="/blog">
-          blog
-        </Link>
+        <Link href="/blog"> blog </Link>
         <span>
           {`/`}
         </span>
-        <Link href="/work">
-          work
-        </Link>
+        <Link href="/papers"> papers </Link>
         <span>
           {`/`}
         </span>
-        <Link href="/projects">
-          projects
-        </Link>
+        <Link href="/projects"> projects </Link>
       </nav>
     </div>
   </Container>
