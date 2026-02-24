@@ -1,7 +1,7 @@
 ---
 title: "DINOv2"
 description: "Transformers are the foundation for next-gen deep learning."
-author: "Ashish Vaswani @ Google"
+author: "Oquab et al. (2023)"
 dateRead: "01/12/2026"
 ---
 

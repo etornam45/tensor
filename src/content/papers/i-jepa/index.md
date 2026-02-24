@@ -1,7 +1,7 @@
 ---
-title: "I-JEPA: Image based Joint Embedding predictive architecture"
+title: "I-JEPA: Self-Supervised Learning from Images with a Joint-Embedding Predictive Architecture"
 description: "Transformers are the foundation for next-gen deep learning."
-author: "Ashish Vaswani @ Google"
+author: "Assran et al. (2023) @ Meta"
 dateRead: "01/08/2025"
 ---
 
