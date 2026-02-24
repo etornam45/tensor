@@ -10,7 +10,7 @@ export const SITE: Site = {
 
 export const HOME: Metadata = {
   TITLE: "Home",
-  DESCRIPTION: "Etornam is a minimal and lightweight blog and portfolio.",
+  DESCRIPTION: "My minimal blog and portfolio.",
 };
 
 export const BLOG: Metadata = {
