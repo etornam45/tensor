@@ -2,7 +2,7 @@
 title: "Attention is all you need"
 description: "Transformers are the foundation for next-gen deep learning."
 author: "Ashish Vaswani @ Google"
-dateRead: "01/01/2020"
+dateRead: "01/01/2025"
 ---
 
 
