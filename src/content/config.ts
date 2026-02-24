@@ -17,6 +17,7 @@ const papers = defineCollection({
     description: z.string(),
     author: z.string(),
     dateRead: z.coerce.date(),
+    link: z.string().optional(),
     draft: z.boolean().optional(),
   }),
 });

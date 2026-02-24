@@ -63,6 +63,8 @@ const { title, description, image = "/nano.png" } = Astro.props;
 
 <!-- RSS Link -->
 <link rel="alternate" type="application/rss+xml" title={SITE.NAME} href={new URL("rss.xml", Astro.site)} />
+<!-- KaTeX -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" />
 
 <script>
   import type { TransitionBeforeSwapEvent } from "astro:transitions/client";

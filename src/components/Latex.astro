@@ -1,0 +1,15 @@
+---
+export interface Props {
+  formula: string;
+  displayMode?: boolean;
+}
+
+const { formula, displayMode = true } = Astro.props;
+const katex = await import('katex');
+const renderedFormula = katex.default.renderToString(formula, {
+  displayMode: displayMode,
+  throwOnError: false,
+});
+---
+
+<Fragment set:html={renderedFormula} />

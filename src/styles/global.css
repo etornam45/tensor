@@ -18,6 +18,7 @@ body {
 }
 
 body {
+  zoom: 85%;
   @apply font-sans antialiased;
   @apply flex flex-col;
   @apply bg-neutral-100 dark:bg-neutral-900;
@@ -25,11 +26,11 @@ body {
 
 
   background-image: radial-gradient(circle at center, rgba(246,144,144,0.4) 0.5px, transparent 0);
-  background-size: 8px 8px; 
+  background-size: 4px 4px; 
 }
 
 .dark body {
-  background-image: radial-gradient(circle at center, rgba(144,144, 246,0.2) 0.5px, transparent 0);
+  background-image: radial-gradient(circle at center, rgba(144,144, 246,0.3) 0.5px, transparent 0);
 }
 
 header {
@@ -50,6 +51,12 @@ article {
   @apply max-w-full prose dark:prose-invert prose-img:mx-auto prose-img:my-auto;
   @apply prose-headings:font-semibold prose-p:font-serif;
   @apply prose-headings:text-black prose-headings:dark:text-white;
+}
+
+@layer base {
+  /* .prose .katex-display {
+    @apply text-foreground;
+  } */
 }
 
 @layer utilities {
