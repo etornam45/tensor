@@ -12,7 +12,9 @@ This paper gave birth to the **Transformer architecture**, which has become the 
 
 ![Transformer model architecture](./transformer.png)
 
+<div style="text-align: center; font-style: italic;">
 Transformer model architecture
+</div>
 
 The transformer model is composed of an encoder and a decoder. This alows for sequence to sequence modeling, such as translation which was the main focus of the paper. Previously, 
 Recurrent Neural Networks (RNNs) were used for sequence modeling, but they had limitations such as the vanishing gradient problem and the inability to capture long-range dependencies. 
@@ -54,7 +56,7 @@ In self-attention, the **query**, **key**, and **value** vectors are all derived
 The encoder is composed of a stack of **N** identical layers. Each layer has two sub-layers. The first sub-layer is a **multi-head self-attention** mechanism with layer normalization and a residual connection. The second sub-layer is a **position-wise feed-forward** network with layer normalization and a residual connection.
 
 The encoder can be as a standalone model, such as in **Bidirectional Encoder Representations from Transformers (BERT)**, or **Vision Transformer (ViT)**.
-In ecense the encoder create a **contextualized representation**/**latent representation** of the input sequence. 
+In essence the encoder create a **contextualized representation**/**latent representation** of the input sequence. 
 
 
 #### The Decoder
@@ -62,7 +64,6 @@ In ecense the encoder create a **contextualized representation**/**latent repres
 The decoder is composed of a stack of **N** identical layers. Each layer has three sub-layers. The first sub-layer is a **masked multi-head self-attention** mechanism with layer normalization and a residual connection. The second sub-layer is a **multi-head cross-attention** mechanism with layer normalization and a residual connection. The third sub-layer is a **position-wise feed-forward** network with layer normalization and a residual connection.
 
 The decoder can be as a standalone model, such as in **Generative Pre-trained Transformer (GPT)**. 
-In ecense the decoder create a **contextualized representation**/**latent representation** of the input sequence. 
 
 
 ### Conclusion (Thoughts)

@@ -12,8 +12,9 @@ Learning is not confined to the walls of a school, nor is education solely deliv
 
 Developing the ability to acquire new knowledge and skills quickly and independently is crucial, not just as a student, but as a person. Economically, people with valuable knowledge or skills tend to earn more than those without. More broadly, knowledgeable people can solve problems, and as the saying goes, people make history either by solving problems or by creating them.
 
-> "Unlike the stomach, the brain doesn't alert you when it's empty."
->  — African and Arabic proverb
+> Unlike the stomach, the brain doesn't alert you when it's empty.
+
+— African and Arabic proverb
 
 The only way you become aware that you need more knowledge is through your environment.
 
