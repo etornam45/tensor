@@ -134,5 +134,5 @@ html.scrolled #back-to-top {
 
 
 .page img {
-  @apply border-neutral-500 border rounded-sm bg-neutral-500/10 p-4;
+  @apply border-neutral-500 border rounded-md bg-neutral-500/10 p-4;
 }
