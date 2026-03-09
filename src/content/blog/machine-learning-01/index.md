@@ -148,7 +148,7 @@ The new function now gives:
 
 | x    | new_y | y  |
 | :--- | ----: | -: |
-| 1    | 4.5   | 3  |
+| 1    | 6     | 3  |
 | 2    | 9.5   | 5  |
 
 We will use $x = 2$ for the step 2 calculation.
