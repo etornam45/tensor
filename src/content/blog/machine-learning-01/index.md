@@ -1,10 +1,10 @@
 ---
-title: "Machine Learning from Scratch"
-description: "Building a neural network with linear algebra and calculus"
+title: "Machine Learning from scratch"
+description: "Building neural network with linear algebra and calculus"
 date: "Mar 9 2026"
 ---
 
-In this blog post I will explain neural networks from scratch using linear regression. I assume you have a basic understanding of `linear algebra` and `calculus` (or `multivariate calculus`). This blog looks at machine learning from a mathematical perspective. I prefer not to write this blog with any rigid structure, but rather let it follow the natural flow of thinking.
+In this blog post I will explain neural networks from scratch using linear regression. I assume you have a basic understanding of `linear algebra` and `calculus` or `multivariate calculus`. This blog looks at machine learning from a mathematical perspective. I prefer not to write this blog with any structure but with the flow of thinking.
 
 Say you have been given a table of values that contains the `x` and `y` values of a linear function $y = mx + c$. How can we find the gradient $m$ and intercept $c$ of $y$?
 
@@ -16,142 +16,192 @@ Say you have been given a table of values that contains the `x` and `y` values o
 | 4  | 9  |
 | 5  | 11 |
 
-Because we know it is a linear function, we can calculate the gradient with $m = \frac{y_2-y_1}{x_2-x_1}$ and then easily find the intercept by substituting $(x_1, y_1)$ and $m$ into $y = mx + c$.
+Because we know it is a linear function we can just calculate the gradient with $m = \frac{y_2-y_1}{x_2-x_1}$. We can easily calculate the intercept by substituting $(x_1, y_1)$ and $m$ into $y = mx + c$.
 
 **Example:** using $(1,3)$ and $(2,5)$
 
 1. Finding the gradient, $m$
 
 $$
-m = \frac{5 - 3}{2 - 1} = 2
+m = \frac{5 - 3}{2 - 1}
+$$
+
+$$
+m = 2
 $$
 
 2. Finding the intercept, $c$, using $(1, 3)$ and $m = 2$
 
 $$
-3 = 2 \times 1 + c \implies c = 1
+3 = 2 \times 1 + c
+$$
+
+$$
+c = 1
 $$
 
 The result is $y = 2x + 1$.
 
-Because we know that our data comes from a linear function, we can easily use this algorithm to find the underlying function that produced the data. But in the real world you cannot always infer what the underlying function is just by looking at the data, so can we come up with an algorithm that helps us approximate it? Yes! That's where a combination of `backpropagation` and `gradient descent` comes into play.
+Because we know that our data comes from a linear function we can easily use this algorithm to find the underlying function that produced the data. But in the real world you cannot just infer what the underlying function is by just looking at the data, so can we come up with an algorithm that helps us approximate it? Yes! That's when a combination of `backpropagation` and `gradient descent` comes to play.
 
-We will use the two to find the underlying function of our data above. To do backpropagation, you need to recall your knowledge of **partial differentiation** and the **chain rule**.
+We will use the two to find the underlying function of our data above. To do backpropagation you have to recollect your knowledge of partial differentiation and the chain rule.
 
-> We are going to use the same assumption from earlier, that our function is linear. Later we'll introduce neural networks to approximate more complex functions.
+> We are going to use the same assumption from earlier that our function is linear. Later we'll introduce neural networks to approximate more complex functions.
 
-That said, let's start with $y = mx + c$. We usually start with random numbers for $m$ and $c$ (say $m = 5$ and $c = 4$), giving us the initial function $y = 5x + 4$. Let's try this function with $x \in \{1, 2\}$ to see how well it does.
+That said let's start with $y = mx + c$. We usually start with random numbers for $m$ and $c$, say $m = 5$ and $c = 4$, to get an initial function $y = 5x + 4$. Let's try using this function with $x \in \{1, 2\}$ to see how well it does.
 
 | x  | new_y | y  |
 :--- | ----: | -: |
 | 1  | 9     | 3  |
 | 2  | 14    | 5  |
 
-We can see that our initial function performed poorly. So we need a way to measure how bad it did. We use a `loss function` (also called a `cost function`) for this. Here we will use **Mean Squared Error**:
+We can see that our initial function performed poorly on producing the original function $y$. So we need a way to tell how bad our new function has performed on the data. We can use a `cost function` or a `loss function` to tell us how bad we did. Here we will use `Mean Squared Error` <br/> $L(y^*, y) = \frac{1}{2}(y^* - y)^2$ but note this is not the only loss function, `Mean Absolute Error` is another one.
 
-$$L(y^*, y) = \frac{1}{2}(y^* - y)^2$$
-
-Note this is not the only loss function. **Mean Absolute Error** is another common choice.
-
-So what is our loss given $x = 1$? With $y^* = 9$ and $y = 3$:
+So what is our loss given $x = 1$? Our $y^* = 9$ and $y = 3$ so our loss is:
 
 $$
 L(9, 3) = 0.5(9 - 3)^2 = 18
 $$
 
-Now that we know how poorly we performed, we can use backpropagation (the Chain Rule) to find the **gradient** (i.e., the direction and magnitude) by which to adjust $m$ and $c$.
+Now that we know how bad we performed we can use backpropagation (Chain Rule) to find how (gradient -> direction and magnitude) to change our $m$ and $c$, $m = 5$ and $c = 4$. To change $m$ or $c$ `w.r.t` the loss, $L$, we need to find the chain of gradients to multiply.
 
 $$
 \frac{\partial L}{\partial y^*} = y^* - y
 $$
 
-We can also calculate the gradient of $y^*$ with respect to $m$ and $c$:
+We can also calculate the gradient of $y^*$ `w.r.t` $m$ and $c$:
 
 $$
-\frac{\partial y^*}{\partial m} = x \qquad \frac{\partial y^*}{\partial c} = 1
+\frac{\partial y^*}{\partial m} = x
 $$
 
-Applying the **Chain Rule**:
+$$
+\frac{\partial y^*}{\partial c} = 1
+$$
+
+Now the `Chain Rule` for $\frac{\partial L}{\partial m}$ and $\frac{\partial L}{\partial c}$:
 
 $$
 \frac{\partial L}{\partial m} = \frac{\partial L}{\partial y^*} \times \frac{\partial y^*}{\partial m}
-\qquad
+$$
+
+$$
 \frac{\partial L}{\partial c} = \frac{\partial L}{\partial y^*} \times \frac{\partial y^*}{\partial c}
 $$
 
-Now that we have the loss with respect to $m$ and $c$, we move on to the last algorithm: **Gradient Descent**. Here is its definition:
+Now that we have the loss $L$ `w.r.t` $m$ and $c$. We'll move on to the last algorithm `Gradient Descent`, it is the simplest of all the algorithms. Here is the definition of gradient descent:
 
 $$
 W \leftarrow W - \eta \frac{\partial L}{\partial W}
 $$
 
-where $\eta$ is the **learning rate** and $W$ is the parameter we are trying to optimize, in this case $m$ and $c$.
+where $\eta$ is the learning rate and $W$ is the parameter we are trying to optimize, in this case $m$ and $c$. Using the values and formulas above we can calculate the new values for $m$ and $c$ with a learning rate of $\eta = 0.25$.
 
-> The larger the learning rate, the faster we move toward the expected parameter, but if it's too large, we can overshoot and never converge. Too small and training becomes very slow. It's a balance.
+> The larger the learning rate the faster to get to the expected parameter but you can easily overshoot and never get to the expected parameter and vice versa.
 
-Using $\eta = 0.25$ and $x = 1$:
+For $m$:
 
-**For $m$:**
+$$
+m = m - \eta \frac{\partial L}{\partial m}
+$$
 
 $$
 m = m - \eta \left(\frac{\partial L}{\partial y^*} \times \frac{\partial y^*}{\partial m}\right)
-= m - \eta \left((y^* - y) \times x\right)
 $$
 
 $$
-m = 5 - 0.25 \times (9 - 3) \times 1 = 5 - 1.5 = 3.5
+m = m - \eta \left((y^* - y) \times x\right)
 $$
 
-**For $c$:**
+$$
+m = 5 - 0.25 \times (9 - 3) \times 1 = (5 - 1.5) = 3.5
+$$
+
+For $c$:
+
+$$
+c = c - \eta \frac{\partial L}{\partial c}
+$$
 
 $$
 c = c - \eta \left(\frac{\partial L}{\partial y^*} \times \frac{\partial y^*}{\partial c}\right)
-= c - \eta \left((y^* - y) \times 1\right)
 $$
 
 $$
-c = 4 - 0.25 \times (9 - 3) \times 1 = 4 - 1.5 = 2.5
+c = c - \eta \left((y^* - y) \times 1\right)
 $$
 
-Our new function is $y = 3.5x + 2.5$. Notice that $m$ and $c$ are already getting closer to the expected values of $m = 2$ and $c = 1$.
+$$
+c = 4 - 0.25 \times (9 - 3) \times 1 = (4 - 1.5) = 2.5
+$$
 
-Let's tabulate the iterations:
+So our new function is $y = 3.5x + 2.5$. I hope you can see the pattern here (the parameters $m$ and $c$ are getting closer to the expected values $m = 2$ and $c = 1$). We can repeat the process until we get the expected values.
 
-| Iteration | m     | c     | L      |
-| :---      | ----: | ----: | -----: |
-| 1         | 5     | 4     | 18     |
-| 2         | 3.5   | 2.5   |        |
+Before moving to step 2, let's tabulate the values of $m$ and $c$ and the loss $L$ for each iteration:
 
-The new function gives:
+| Iteration | m     | c     | L   |
+| :---      | ----: | ----: | --: |
+| 1         | 5     | 4     | 18  |
+| 2         | 3.5   | 2.5   |     |
+
+The new function now gives:
 
 | x    | new_y | y  |
 | :--- | ----: | -: |
 | 1    | 4.5   | 3  |
 | 2    | 9.5   | 5  |
 
-We'll use $x = 2$ for the next iteration.
+We will use $x = 2$ for the step 2 calculation.
 
-> Using different values of $x$ across iterations is important for more complex functions, as it exposes the model to different parts of the data and leads to a better approximation.
+> Using different values of x is done for more complex functions to get a better approximation of the underlying function.
 
-So what is our loss for $x = 2$? With $y^* = 9.5$ and $y = 5$:
+So what is our loss for $x = 2$? Our $y^* = 9.5$ and $y = 5$ so our loss is:
 
 $$
 L(9.5, 5) = 0.5(9.5 - 5)^2 = 10.125
 $$
 
-**For $m$:**
+Now we can calculate the new values for $m$ and $c$ with a learning rate of $\eta = 0.25$.
+
+For $m$:
 
 $$
-m = 3.5 - 0.25 \times (9.5 - 5) \times 2 = 3.5 - 2.25 = 1.25
+m = m - \eta \frac{\partial L}{\partial m}
 $$
 
-**For $c$:**
-
 $$
-c = 2.5 - 0.25 \times (9.5 - 5) \times 1 = 2.5 - 1.125 = 1.375
+m = m - \eta \left(\frac{\partial L}{\partial y^*} \times \frac{\partial y^*}{\partial m}\right)
 $$
 
-Our new function is $y = 1.25x + 1.375$.
+$$
+m = m - \eta \left((y^* - y) \times x\right)
+$$
+
+$$
+m = 3.5 - 0.25 \times (9.5 - 5) \times 2 = (3.5 - 2.25) = 1.25
+$$
+
+For $c$:
+
+$$
+c = c - \eta \frac{\partial L}{\partial c}
+$$
+
+$$
+c = c - \eta \left(\frac{\partial L}{\partial y^*} \times \frac{\partial y^*}{\partial c}\right)
+$$
+
+$$
+c = c - \eta \left((y^* - y) \times 1\right)
+$$
+
+$$
+c = 2.5 - 0.25 \times (9.5 - 5) \times 1 = (2.5 - 1.125) = 1.375
+$$
+
+So our new function is $y = 1.25x + 1.375$.
+
+Step 3
 
 | Iteration | m     | c     | L      |
 | :---      | ----: | ----: | -----: |
@@ -159,7 +209,7 @@ Our new function is $y = 1.25x + 1.375$.
 | 2         | 3.5   | 2.5   | 10.125 |
 | 3         | 1.25  | 1.375 |        |
 
-The new function now gives:
+Our new function now gives:
 
 | x    | new_y  | y  |
 | :--- | -----: | -: |
@@ -167,15 +217,12 @@ The new function now gives:
 | 2    | 3.875  | 5  |
 | 3    | 5.125  | 7  |
 
-Repeating this process over and over again will converge to the values $m = 2$ and $c = 1$. Rather than doing this by hand, we can write a computer algorithm using a loop. I'll be using Python here, but you can use any language of your choice.
+Repeating the process over and over again will converge to the approximate values of $m = 2$ and $c = 1$. We can write a computer algorithm to make the process easier rather than using a loop. I will be using Python here to make it easier to understand but you can use any language of your choice to implement it.
 
-#### Putting it all together
-
-First, let's generate the data using `numpy`:
+I will first create the data using `numpy`:
 
 ```py
 import numpy as np
-
 x = np.arange(0, 10, 1)
 y = 2 * x + 1
 
@@ -188,16 +235,16 @@ print(y)
 [ 1  3  5  7  9 11 13 15 17 19]
 ```
 
-Next, randomly initialize $m$ and $c$:
+Now that we have the data we can proceed to randomly initializing our $m$ and $c$:
 
 ```py
 import random
+# 1. Setup
+w = random.random()
+c = random.random()
 
-W = random.random()
-C = random.random()
-
-print(W)
-print(C)
+print(w)
+print(c)
 ```
 ```bash
 # Output example
@@ -205,7 +252,58 @@ print(C)
 0.987654321
 ```
 
-Now we can implement the full training loop, calculating the loss, computing the gradients via backpropagation, and updating the parameters via gradient descent:
+Now we can proceed to the next step, which is to calculate the loss $L$ and the gradients $\frac{\partial L}{\partial m}$ and $\frac{\partial L}{\partial c}$:
+
+```py
+# 2. Calculate Loss and Gradients
+# (x and y here refer to a single data point in the training loop)
+
+# Calculate the predicted value
+y_pred = w * x + c
+
+# Calculate the loss
+loss = 0.5 * (y_pred - y) ** 2
+
+# Calculate the gradients
+dloss_dy_pred = y_pred - y
+dy_pred_dw = x
+dy_pred_dc = 1
+
+dloss_dw = dloss_dy_pred * dy_pred_dw
+dloss_dc = dloss_dy_pred * dy_pred_dc
+
+print(f"Loss: {loss}")
+print(f"Gradient w.r.t. w: {dloss_dw}")
+print(f"Gradient w.r.t. c: {dloss_dc}")
+```
+```bash
+# Output example
+Loss: 10.125
+Gradient w.r.t. w: 2.25
+Gradient w.r.t. c: 1.125
+```
+
+Now we can proceed to the next step, which is to update the values of $m$ and $c$ using the gradients we calculated above:
+
+```py
+# 3. Update Parameters
+learning_rate = 0.25
+
+w = w - learning_rate * dloss_dw
+c = c - learning_rate * dloss_dc
+
+print(f"Updated w: {w}")
+print(f"Updated c: {c}")
+```
+```bash
+# Output example
+Updated w: 1.25
+Updated c: 1.375
+```
+
+#### Putting it all together
+
+We can now put it all together in a loop to repeat the process until we get the expected values of $m = 2$ and $c = 1$:
 
 ```py
 import numpy as np
@@ -214,28 +312,29 @@ import random
 X = np.arange(0, 10, 1)
 Y = 2 * X + 1
 
-# 1. Initialize parameters randomly
+# 1. Setup
 W = random.random() * 10
 C = random.random() * 10
 
-print(f"Initial W: {W:.4f}, Initial C: {C:.4f}")
+print(W)
+print(C)
 
-epochs = 50        # number of passes through the dataset
+epoch = 50  # the number of times we iterate through the dataset
 learning_rate = 0.05
 
-# 2. Training loop
-for i in range(epochs):
+# 2. Loop
+for i in range(epoch):
+    # now we'll move through the data points one by one
     LOSS = 0
     for x, y in zip(X, Y):
 
-        # Forward pass
         y_pred = W * x + C
 
-        # Loss (Mean Squared Error)
         loss = 0.5 * (y_pred - y) ** 2
-        LOSS += loss
 
-        # Backpropagation (Chain Rule)
+        LOSS += loss  # accumulate the loss
+
+        # Calculate the gradients
         dloss_dy_pred = y_pred - y
         dy_pred_dw = x
         dy_pred_dc = 1
@@ -243,27 +342,28 @@ for i in range(epochs):
         dloss_dw = dloss_dy_pred * dy_pred_dw
         dloss_dc = dloss_dy_pred * dy_pred_dc
 
-        # Gradient Descent update
+        # Update Parameters
         W = W - learning_rate * dloss_dw
         C = C - learning_rate * dloss_dc
 
-    print(f"Epoch = {i:2d} | Loss = {(LOSS / len(X)):.5f} | Y = {W:.2f}X + {C:.2f}")
+    print(f"Epoch = {i} Loss = {(LOSS / len(X)):.{5}f} Y = {W:.{2}f}X + {C:.{2}f}")
 ```
 
 ```bash
-Initial W: 6.4361, Initial C: 8.5625
-Epoch =  0 | Loss = 31.27642 | Y = 0.79X + 5.87
-Epoch =  1 | Loss =  2.18066 | Y = 1.67X + 5.60
-Epoch =  2 | Loss =  2.53907 | Y = 1.60X + 5.06
+6.436103983994634
+8.562471646963367
+Epoch = 0 Loss = 31.27642 Y = 0.79X + 5.87
+Epoch = 1 Loss = 2.18066 Y = 1.67X + 5.60
+Epoch = 2 Loss = 2.53907 Y = 1.60X + 5.06
 ....
 ....
 ....
-Epoch = 47 | Loss =  0.00007 | Y = 2.00X + 1.02
-Epoch = 48 | Loss =  0.00005 | Y = 2.00X + 1.02
-Epoch = 49 | Loss =  0.00004 | Y = 2.00X + 1.01
+Epoch = 47 Loss = 0.00007 Y = 2.00X + 1.02
+Epoch = 48 Loss = 0.00005 Y = 2.00X + 1.02
+Epoch = 49 Loss = 0.00004 Y = 2.00X + 1.02
 ```
 
-If you haven't realized it yet, **this is machine learning**. This simple algorithm, when scaled up and extended, creates the intelligent systems that can recognize objects in images, generate art, fold proteins, drive cars, and much more. At its core, machine learning is about finding a good approximation to an unknown function, and gradient descent is how we get there.
+If you haven't realized it yet this is machine learning and this simple algorithm when expanded creates very intelligent machines that can recognize objects, create art, fold proteins, drive cars and the list goes on. So we can say that this algorithm is a universal function approximator.
 
 ## Summary
 
@@ -278,8 +378,3 @@ In this post, we built a machine learning algorithm from scratch using only line
 Repeat these three steps across the dataset for many iterations (epochs), and the parameters will gradually converge to the values that best describe the underlying function.
 
 This is the exact same loop (forward pass, backpropagation, gradient descent) that powers modern deep learning. In a neural network, the model is more complex (many layers of neurons with non-linear activation functions), but the training algorithm is fundamentally identical to what we built here. Once you understand this loop, you understand the engine behind all of modern AI.
-
-
-I will be writing a part two soon where we'll look at neural networks and computation graphs
-
-Thank you for reading
