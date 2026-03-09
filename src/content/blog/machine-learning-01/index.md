@@ -378,3 +378,6 @@ In this post, we built a machine learning algorithm from scratch using only line
 Repeat these three steps across the dataset for many iterations (epochs), and the parameters will gradually converge to the values that best describe the underlying function.
 
 This is the exact same loop (forward pass, backpropagation, gradient descent) that powers modern deep learning. In a neural network, the model is more complex (many layers of neurons with non-linear activation functions), but the training algorithm is fundamentally identical to what we built here. Once you understand this loop, you understand the engine behind all of modern AI.
+
+
+Thank you for reading. I will be writing a part two on `Neural Networks` and `Computation Graphs`
