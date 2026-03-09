@@ -69,6 +69,10 @@ $$
 \frac{\partial L}{\partial y^*} = y^* - y
 $$
 
+> You can use the **Power Rule** and **Chain Rule** to differentiate `Mean Squared Error`, $L(y^*, y)$ function. Apply the **Power Rule** first by multiplying the exponent by the coefficient. $2\times \frac{1}{2}(y^* - y)$. This gives $2\times\frac{1}{2} = 1$. Then, with the **Chain Rule**, we can differentiate the inner expression $(y^* - y)$ with respect to $y^*$. The derivative of $y^*$ is 1. Combine it to get $1 (y^* - y)^1 \times (1) = y^* - y$
+
+
+
 We can also calculate the gradient of $y^*$ `w.r.t` $m$ and $c$:
 
 $$
