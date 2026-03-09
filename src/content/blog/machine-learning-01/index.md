@@ -42,7 +42,7 @@ $$
 
 The result is $y = 2x + 1$.
 
-Because we know that our data comes from a linear function we can easily use this algorithm to find the underlying function that produced the data. But in the real world you cannot just infer what the underlying function is by just looking at the data, so can we come up with an algorithm that helps us approximate it? Yes! That's when a combination of `backpropagation` and `gradient descent` comes to play.
+Because we know that our data comes from a linear function we can easily use this algorithm to find the underlying function that produced the data. But in the real world, you cannot just infer what the underlying function is by just looking at the data. So, can we come up with an algorithm that helps us approximate it? Yes! That's when a combination of `backpropagation` and `gradient descent` comes to play.
 
 We will use the two to find the underlying function of our data above. To do backpropagation you have to recollect your knowledge of partial differentiation and the chain rule.
 
@@ -55,7 +55,7 @@ That said let's start with $y = mx + c$. We usually start with random numbers fo
 | 1  | 9     | 3  |
 | 2  | 14    | 5  |
 
-We can see that our initial function performed poorly on producing the original function $y$. So we need a way to tell how bad our new function has performed on the data. We can use a `cost function` or a `loss function` to tell us how bad we did. Here we will use `Mean Squared Error` <br/> $L(y^*, y) = \frac{1}{2}(y^* - y)^2$ but note this is not the only loss function, `Mean Absolute Error` is another one.
+We can see that our initial function performed poorly on producing the original function $y$. So we need a way to tell how bad our new function has performed on the data. We can use a `cost function` or a `loss function` to tell us how bad we did. Here we will use `Mean Squared Error` <br/> $L(y^*, y) = \frac{1}{2}(y^* - y)^2$ but note, this is not the only loss function. `Mean Absolute Error` is another one.
 
 So what is our loss given $x = 1$? Our $y^* = 9$ and $y = 3$ so our loss is:
 
@@ -73,7 +73,7 @@ $$
 
 
 
-We can also calculate the gradient of $y^*$ `w.r.t` $m$ and $c$:
+We can also calculate the gradient of $y^*$ `w.r.t` $m$ and $c$ from $y = mx + c$:
 
 $$
 \frac{\partial y^*}{\partial m} = x
@@ -83,7 +83,7 @@ $$
 \frac{\partial y^*}{\partial c} = 1
 $$
 
-Now the `Chain Rule` for $\frac{\partial L}{\partial m}$ and $\frac{\partial L}{\partial c}$:
+Now with the `Chain Rule` we can find the derivatives $\frac{\partial L}{\partial m}$ and $\frac{\partial L}{\partial c}$:
 
 $$
 \frac{\partial L}{\partial m} = \frac{\partial L}{\partial y^*} \times \frac{\partial y^*}{\partial m}
@@ -221,7 +221,7 @@ Our new function now gives:
 | 2    | 3.875  | 5  |
 | 3    | 5.125  | 7  |
 
-Repeating the process over and over again will converge to the approximate values of $m = 2$ and $c = 1$. We can write a computer algorithm to make the process easier rather than using a loop. I will be using Python here to make it easier to understand but you can use any language of your choice to implement it.
+Repeating the process over and over again will converge to the approximate values of $m = 2$ and $c = 1$. We can write a computer algorithm to make the process easier using a loop rather than manually calculating it. I will be using Python here to make it easier to understand but you can use any language of your choice to implement it.
 
 I will first create the data using `numpy`:
 
