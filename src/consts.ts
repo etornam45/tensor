@@ -9,35 +9,35 @@ export const SITE: Site = {
 };
 
 export const HOME: Metadata = {
-  TITLE: "Home",
-  DESCRIPTION: "My minimal blog and portfolio.",
+  TITLE: "Minimalist Engineer & Problem Solver",
+  DESCRIPTION: "Etornam is a minimalist engineer focused on solving real-world problems through robust system design and open-source contributions.",
 };
 
 export const BLOG: Metadata = {
-  TITLE: "Blog",
-  DESCRIPTION: "A collection of articles on topics I am passionate about.",
+  TITLE: "Blog | Insights on Engineering & Tech",
+  DESCRIPTION: "A collection of articles and insights on topics I am passionate about, ranging from minimalist engineering to modern technology.",
 };
 
 export const PAPERS: Metadata = {
-  TITLE: "Papers",
-  DESCRIPTION: "Papers I have read and my thoughts on them.",
+  TITLE: "Paper Reviews | Academic Insights",
+  DESCRIPTION: "Detailed reviews and thoughts on academic papers that I have read and found interesting.",
 };
 
 export const PROJECTS: Metadata = {
-  TITLE: "Projects",
-  DESCRIPTION: "A collection of my projects, with links to repositories and demos.",
+  TITLE: "Projects | Built with Purpose",
+  DESCRIPTION: "A curated collection of my projects, including repositories, demos, and the philosophy behind them.",
 };
 
 export const SOCIALS: Socials = [
-  { 
+  {
     NAME: "twitter-x",
     HREF: "https://twitter.com/etornam45",
   },
-  { 
+  {
     NAME: "github",
     HREF: "https://github.com/etornam45"
   },
-  { 
+  {
     NAME: "linkedin",
     HREF: "https://www.linkedin.com/in/etornam45",
   }

@@ -7,7 +7,7 @@ import rehypeKatex from "rehype-katex";
 
 
 export default defineConfig({
-  site: "https://astro-nano-demo.vercel.app",
+  site: "https://etornam.vercel.app",
   integrations: [mdx(), sitemap(), tailwind()],
   markdown: {
     remarkPlugins: [
