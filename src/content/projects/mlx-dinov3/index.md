@@ -5,9 +5,9 @@ date: "Mar 10 2026"
 repoURL: "https://github.com/etornam45/mlx_dinov3"
 ---
 
-I've always been fascinated by how Meta's DINO models handle self-supervised learning. With the release of DINOv3 and the growing ecosystem for Apple Silicon, I wanted to build a high-performance, MLX-native implementation. This isn't just a port; it's a re-imagining of the DinoVisionTransformer architecture optimized for the unified memory of the M-series chips.
+A high-performance, MLX-native implementation of **DINOv3** (the latest iteration of self-supervised ViT models from Meta) optimized for Apple Silicon.
 
-This implementation includes modern features like Rotary Position Embeddings (RoPE), SwiGLU Feed-Forward Networks, and LayerScale, all built using the [MLX](https://github.com/ml-explore/mlx) framework.
+This repository provides an implementation of the DinoVisionTransformer architecture, including modern features like Rotary Position Embeddings (RoPE), SwiGLU Feed-Forward Networks, and LayerScale, all built using the [MLX](https://github.com/ml-explore/mlx) framework.
 
 ## Features
 

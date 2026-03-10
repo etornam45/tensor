@@ -16,7 +16,7 @@ const { entry } = Astro.props;
   <div class="flex flex-col flex-1 truncate">
     <div class="flex items-center gap-2 mb-1">
       <span class="text-[10px] uppercase px-1.5 py-0.5 rounded bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 font-medium tracking-tight">
-        {entry.collection.slice(0, -1)}
+        {entry.collection.endsWith("s") ? entry.collection.slice(0, -1) : entry.collection}
       </span>
       <span class="text-xs text-black/50 dark:text-white/50">
         {formatDate('date' in entry.data ? entry.data.date : entry.data.dateRead)}
