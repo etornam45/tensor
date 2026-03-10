@@ -7,70 +7,74 @@ import Link from "@components/Link.astro";
 import { SITE, HOME, SOCIALS } from "@consts";
 
 const blog = (await getCollection("blog"))
-  .filter(post => !post.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0,SITE.NUM_POSTS_ON_HOMEPAGE);
+  .filter(post => !post.data.draft);
 
 const projects = (await getCollection("projects"))
-  .filter(project => !project.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0,SITE.NUM_PROJECTS_ON_HOMEPAGE);
+  .filter(project => !project.data.draft);
 
 const allpapers = (await getCollection("papers"))
-  .filter(paper => !paper.data.draft)
-  .sort((a, b) => new Date(b.data.dateRead).valueOf() - new Date(a.data.dateRead).valueOf())
-  .slice(0,SITE.NUM_PAPERS_ON_HOMEPAGE);
+  .filter(paper => !paper.data.draft);
+
+// Combine blog and projects for a unified feed
+const recentFeed = [...blog, ...projects]
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE + SITE.NUM_PROJECTS_ON_HOMEPAGE);
 
 const papers = await Promise.all(
-  allpapers.map(async (item) => {
-    const { Content } = await item.render();
-    return { ...item, Content };
-  })
+  allpapers
+    .sort((a, b) => new Date(b.data.dateRead).valueOf() - new Date(a.data.dateRead).valueOf())
+    .slice(0, SITE.NUM_PAPERS_ON_HOMEPAGE)
+    .map(async (item) => {
+      const { Content } = await item.render();
+      return { ...item, Content };
+    })
 );
 ---
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
   <Container>
-    <h4 class="animate fascinate-regular text-5xl text-black dark:text-white">
-      Hi, I'm <br> <span class="gradient-text transition-all duration-300 ease-in-out cursor-progress hover:underline decoration-double">Etornam</span>
-    </h4>
-    <div class="space-y-16">
-      <section>
-        <article class="space-y-4">
-          <p class="animate text-justify">
-            I’m a minimalist, first-principles engineer who loves solving real-world problems or work on interesting ideas. I care less about buzzwords, it's more about building robust systems that actually solve problems
+    <div class="animate">
+      <h4 class="fascinate-regular text-5xl text-black dark:text-white mb-2">
+        Hi, I'm <span class="gradient-text decoration-double">Etornam</span>
+      </h4>
+      <p class="text-black/50 dark:text-white/50 font-medium">Minimalist Engineer & Problem Solver</p>
+    </div>
+    
+    <div class="space-y-16 mt-12">
+      <section class="animate">
+        <article class="space-y-4 text-justify">
+          <p>
+            I’m a minimalist, first-principles engineer who loves solving real-world problems. I care less about buzzwords and more about building robust systems that actually solve problems.
           </p>
-          <p class="animate text-justify">
-            I am a strong advocate for open source and believe in the power of 
-            collaboration to drive innovation. I am always on the lookout for new 
-            challenges and opportunities to learn and grow.
+          <p>
+            This is my digital garden where I share my thoughts on engineering, machine learning, and the papers I'm reading.
           </p>
-          <p class="animate text-justify my-8">
-            <span class="fascinate-regular text-base">"Ne ènya wò agbe ƒe taɖodzinu la, xexeame katã ɖoa nugbe be yeana wòava eme"</span> <span class="italic"> — Paulo Coelho</span>
+          <p class="mt-8">
+            <span class="fascinate-regular text-base">"Ne ènya wò agbe ƒe taɖodzinu la, xexeame katã ɖoa nugbe be yeana wòava eme"</span> <span class="italic text-sm text-black/60 dark:text-white/60"> — Paulo Coelho</span>
           </p>
         </article>
-
       </section>
 
       <section class="animate space-y-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
           <h5 class="font-semibold text-black dark:text-white">
-            Latest posts
+            Recent feed
           </h5>
-          <Link href="/blog">
-            See all posts
-          </Link>
+          <div class="flex gap-3">
+             <Link href="/blog">Blog</Link>
+             <Link href="/projects">Projects</Link>
+          </div>
         </div>
         <ul class="flex flex-col gap-4">
-          {blog.map(post => (
+          {recentFeed.map(entry => (
             <li>
-              <ArrowCard entry={post} />
+              <ArrowCard entry={entry} />
             </li>
           ))}
         </ul>
       </section>
 
-      <section class="space-y-6">
+      <section class="animate space-y-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
           <h5 class="font-semibold text-black dark:text-white">
             Paper Reviews
