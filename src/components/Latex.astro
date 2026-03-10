@@ -5,7 +5,7 @@ export interface Props {
 }
 
 const { formula, displayMode = true } = Astro.props;
-const katex = await import('katex');
+const katex = await import("katex");
 const renderedFormula = katex.default.renderToString(formula, {
   displayMode: displayMode,
   throwOnError: false,
