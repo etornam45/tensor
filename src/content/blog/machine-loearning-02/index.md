@@ -188,7 +188,7 @@ $$
 \frac{\partial L}{\partial y} = \frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{y}_i) = y - \hat{y} = 21 - 3 = 18
 $$
 
-Before we can apply the chain rule, we need a few individual partial derivatives first — think of them as the building blocks that will be multiplied together in the next section.
+Before we can apply the chain rule, we need a few individual partial derivatives first, think of them as the building blocks that will be multiplied together in the next section.
 
 **Output layer gradients** from $y = W_{out}z + b_{out}$:
 
