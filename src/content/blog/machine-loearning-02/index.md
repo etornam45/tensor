@@ -143,6 +143,7 @@ W = \begin{pmatrix} 1 & 2 \\ -3 & 4 \\ 1 & -1 \end{pmatrix}_{\!3\times2}, \quad 
 $$
 
 > $W$ is $3\times2$ because we have 3 hidden neurons each receiving 2 inputs.
+> Also note that the parameters are initialized randomly.
 
 **Computing the hidden layer** first apply the weights, then ReLU:
 
