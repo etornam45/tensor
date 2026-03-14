@@ -366,7 +366,7 @@ Epoch 9: Loss = 0.0000, Prediction = 3.0034
 We have seen a complex network evolve to learn the function that maps $(1, 2)$ to $3$. This kind of network is called a **Multi-Layer Perceptron (MLP)** or **Feed Forward Neural Network (FFNN)**. The general formula for any MLP is:
 
 $$
-y = \sigma(F_n(\sigma(F_{n-1}(\sigma(F_{n-2}(\cdots \sigma(F_1(x))\cdots))))))
+y = \sigma_n(F_n(\sigma_{n-1}(F_{n-1}(\sigma_{n-2}(F_{n-2}(\cdots \sigma_1(F_1(x))\cdots))))))
 $$
 
 $$
@@ -403,7 +403,7 @@ $$
 
 **MLP (Multi-Layer Perceptron)** is the general name for this architecture. Its formula is:
 $$
-y = \sigma(F_n(\sigma(F_{n-1}(\cdots \sigma(F_1(x))\cdots))))
+y = \sigma_n(F_n(\sigma_{n-1}(F_{n-1}(\cdots \sigma_1(F_1(x))\cdots))))
 $$
 where $F(x) = Wx + B$ and $\sigma$ is any activation function.
 
